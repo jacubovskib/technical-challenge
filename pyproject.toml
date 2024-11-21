@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "tech-challenge"
+version = "0.1.0"
+description = ""
+authors = ["Breno Jacubovski <jacubovski.breno@outlook.com>"]
+readme = "README.md"
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^8.3.3"
+pytest-mock = "^3.14.0"
+fastapi = "^0.115.5"
+uvicorn = "^0.32.0"
+sqlalchemy = "^2.0.36"
+pydantic = "^2.9.2"
+flask = "^3.1.0"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v -s"

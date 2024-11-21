@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./src:/app/src
+      - ./test:/app/test
+      - ./data:/app/data
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
