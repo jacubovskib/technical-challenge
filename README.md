@@ -1,4 +1,4 @@
-# PicPay Backend Challenge
+# Technical Backend Challenge
 
 ## Overview
 Backend application developed for the technical challenge, implementing a simplified users api.
