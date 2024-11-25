@@ -1,4 +1,3 @@
-import re
 from sqlalchemy import desc, asc, update, or_
 
 from src.domain.exceptions import IntegrityException
@@ -7,13 +6,13 @@ from src.domain.pagination.pagination import Pagination
 from src.domain.pagination.search_query import SearchQuery
 from src.domain.user.user import User
 from src.infra.db.settings.connection import DBConnectionHandler
-from src.infra.db.entities.users import UserEntity
+from src.infra.persistence.entities.users import UserEntity
 from src.domain.user.abs_user_gateway import AbsUsersGateway
 
 class UsersRepository(AbsUsersGateway):
 
     @classmethod
-    def insert_usr(cls, user: User) -> None:
+    def insert_usr(cls, user: User) -> User:
         with DBConnectionHandler() as db:
             notification = cls._check_existing_fields(db.session, user.name, user.email)
 
@@ -24,6 +23,7 @@ class UsersRepository(AbsUsersGateway):
                 user = UserEntity.from_domain(user)
                 db.session.add(user)
                 db.session.commit()
+                return user.to_domain()
             except Exception as e:
                 db.session.rollback()
                 raise e

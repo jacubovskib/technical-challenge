@@ -8,7 +8,7 @@ help:
 	@echo "║                     Available Commands                        ║"
 	@echo "╠══════════════════════════════════════════════════════════════╣"
 	@echo "║ Development:                                                  ║"
-	@echo "║   make configure     - Install Poetry and dependencies        ║"
+	@echo "║   make config        - Install Poetry and dependencies        ║"
 	@echo "║   make check-env     - Verify development environment         ║"
 	@echo "║                                                              ║"
 	@echo "║ Testing:                                                     ║"
@@ -64,20 +64,25 @@ check-env:
 		echo "Make not found"; \
 	fi
 
-configure:
-	@echo "Checking Python version..."
-	@if [ $(shell echo "$(PYTHON_VERSION_CURRENT) >= $(PYTHON_VERSION_MIN)" | bc -l) -eq 1 ]; then \
-		echo "Python version $(PYTHON_VERSION_CURRENT) OK"; \
+config:
+		@echo "Checking Python version..."
+	@if [ $(shell python3 -c 'from packaging import version; print(1 if version.parse("$(PYTHON_VERSION_CURRENT)") >= version.parse("$(PYTHON_VERSION_MIN)") else 0)') -eq 1 ]; then \
+		echo "\033[32mPython version $(PYTHON_VERSION_CURRENT) OK\033[0m"; \
 	else \
-		echo "Python version $(PYTHON_VERSION_CURRENT) is not supported. Please install Python $(PYTHON_VERSION_MIN) or higher"; \
+		echo "\033[31mPython version $(PYTHON_VERSION_CURRENT) is not supported. Please install Python $(PYTHON_VERSION_MIN) or higher\033[0m"; \
 		exit 1; \
 	fi
-	@if ! command -v poetry &> /dev/null; then \
+	@if command -v poetry &> /dev/null; then \
+		echo "\033[32mPoetry is already installed\033[0m"; \
+	else \
 		echo "Installing Poetry..."; \
 		curl -sSL https://install.python-poetry.org | python3 -; \
 	fi
-	@echo "Installing dependencies..."
+	@echo "\033[34mActivating Ambient Poetry......\033[0m"
+	poetry shell
+	@echo "\033[34mInstalling dependencies...\033[0m"
 	poetry install
+
 
 build:
 	@echo "Building package..."

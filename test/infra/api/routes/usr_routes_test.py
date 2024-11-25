@@ -1,9 +1,10 @@
 import unittest
 import json
+from flask_testing import TestCase
 from src.infra.server import app
 
 
-class TestUserRoutes(unittest.TestCase):
+class TestUserRoutes(TestCase):
     def setUp(self):
         self.app = app.test_client()
         self.base_url = '/api/v1/users'

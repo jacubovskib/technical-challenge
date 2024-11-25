@@ -60,6 +60,31 @@ cp .env.example .env
 ```
 
 ## Development
+### Available Commands
+```bash
+"╔═══════════════════════════════════════════════════════════════╗"
+"║                     Available Commands                        ║"
+"╠═══════════════════════════════════════════════════════════════╣"
+"║ Development:                                                  ║"
+"║   make config        - Install Poetry and dependencies        ║"
+"║   make check-env     - Verify development environment         ║"
+"║                                                               ║"
+"║ Testing:                                                      ║"
+"║   make test          - Run all tests                          ║"
+"║   make test-domain   - Run domain tests                       ║"
+"║   make test-infra    - Run infrastructure tests               ║"
+"║   make test-app      - Run application tests                  ║"
+"║                                                               ║"
+"║ Docker:                                                       ║"
+"║   make docker-build  - Build Docker image                     ║"
+"║   make docker-up     - Start Docker containers                ║"
+"║   make docker-down   - Stop Docker containers                 ║"
+"║                                                               ║"
+"║ Utilities:                                                    ║"
+"║   make clean         - Remove cache files and directories     ║"
+"║   make help          - Show this help message                 ║"
+"╚═══════════════════════════════════════════════════════════════╝"
+```
 
 ### Running Locally
 ```bash
@@ -82,18 +107,6 @@ make test-infra         # Run infrastructure tests
 make test-application   # Run application tests
 ```
 
-### Available Commands
-```bash
-make help - Show all available commands
-make configure - Install Poetry and dependencies
-make check-env - Verify development environment
-make build - Build the application
-make test - Run all tests
-make clean - Clean cache files
-make docker-build - Build Docker image
-make docker-up - Start Docker containers
-make docker-down - Stop Docker containers
-```
 
 ### Environment Variables
 ```bash
