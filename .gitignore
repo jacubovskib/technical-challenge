@@ -93,4 +93,5 @@ output
 resources
 database/
 /dist
-.env
+storage.db
+test/infra/persistence/repositories/storage.db

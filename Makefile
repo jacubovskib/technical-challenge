@@ -4,18 +4,21 @@ PYTHON_VERSION_MIN = 3.11
 PYTHON_VERSION_CURRENT := $(shell python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
 help:
+help:
 	@echo "╔══════════════════════════════════════════════════════════════╗"
 	@echo "║                     Available Commands                        ║"
 	@echo "╠══════════════════════════════════════════════════════════════╣"
 	@echo "║ Development:                                                  ║"
 	@echo "║   make config        - Install Poetry and dependencies        ║"
 	@echo "║   make check-env     - Verify development environment         ║"
+	@echo "║   make build         - Build package                         ║"
+	@echo "║   make run          - Run the application                    ║"
 	@echo "║                                                              ║"
 	@echo "║ Testing:                                                     ║"
 	@echo "║   make test          - Run all tests                         ║"
 	@echo "║   make test-domain   - Run domain tests                      ║"
 	@echo "║   make test-infra    - Run infrastructure tests              ║"
-	@echo "║   make test-app      - Run application tests                 ║"
+	@echo "║   make test-application - Run application tests              ║"
 	@echo "║                                                              ║"
 	@echo "║ Docker:                                                      ║"
 	@echo "║   make docker-build  - Build Docker image                    ║"
@@ -87,6 +90,9 @@ config:
 build:
 	@echo "Building package..."
 	poetry build
+
+run:
+	poetry run python main.py
 
 test-application:
 	@echo "Running application tests..."

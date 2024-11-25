@@ -12,7 +12,6 @@ from src.infra.persistence.repositories import UsersRepository
 
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
-        settings.set_test_database()
         self.db_connection_handler = DBConnectionHandler()
         self.connection = self.db_connection_handler.get_engine().connect()
         self.repository = UsersRepository()

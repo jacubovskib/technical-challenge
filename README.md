@@ -69,12 +69,14 @@ cp .env.example .env
 "║ Development:                                                  ║"
 "║   make config        - Install Poetry and dependencies        ║"
 "║   make check-env     - Verify development environment         ║"
+"║   make build         - Build package                          ║"
+"║   make run          - Run the application                     ║"
 "║                                                               ║"
 "║ Testing:                                                      ║"
 "║   make test          - Run all tests                          ║"
 "║   make test-domain   - Run domain tests                       ║"
 "║   make test-infra    - Run infrastructure tests               ║"
-"║   make test-app      - Run application tests                  ║"
+"║   make test-application - Run application tests               ║"
 "║                                                               ║"
 "║ Docker:                                                       ║"
 "║   make docker-build  - Build Docker image                     ║"
@@ -90,8 +92,8 @@ cp .env.example .env
 ### Running Locally
 ```bash
 make build
-or
-poetry run python -m src.main
+
+make run
 
 ```
 ### Running with Docker
