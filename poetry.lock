@@ -110,6 +110,19 @@ async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
 
 [[package]]
+name = "flask-testing"
+version = "0.8.1"
+description = "Unit testing for Flask"
+optional = false
+python-versions = "*"
+files = [
+    {file = "Flask-Testing-0.8.1.tar.gz", hash = "sha256:0a734d7b68e63a9410b413cd7b1f96456f9a858bd09a6222d465650cc782eb01"},
+]
+
+[package.dependencies]
+Flask = "*"
+
+[[package]]
 name = "greenlet"
 version = "3.1.1"
 description = "Lightweight in-process concurrent programming"
@@ -702,4 +715,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a0681ca9073d37bee33eae48504707eb6318cd8548c1778a6949190826a56b85"
+content-hash = "0ce0b67b09ff393cd0b4c96864aee3e2759f0a9b41d641d370bfb524afda4762"

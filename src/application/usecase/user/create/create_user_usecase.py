@@ -26,9 +26,10 @@ class CreateUserUseCase(AbsCreateUserUseCase):
             _errors: List[str] = notification.get_errors()
             raise ValidationException(','.join(_errors))
 
-        self.__user_gateway.insert_usr(an_user)
+        user = self.__user_gateway.insert_usr(an_user)
 
         return CreateUserOutput(
-            name=an_user.name,
-            email=an_user.email
+            id=user.id,
+            name=user.name,
+            email=user.email
         )

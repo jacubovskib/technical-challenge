@@ -91,6 +91,6 @@ output
 # batect
 .batect/caches/key
 resources
-data/
+database/
 /dist
 .env

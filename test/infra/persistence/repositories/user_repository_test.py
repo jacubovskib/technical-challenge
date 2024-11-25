@@ -6,7 +6,7 @@ from src.domain.exceptions import IntegrityException
 from src.domain.pagination.search_query import SearchQuery
 from src.domain.user.user import User
 from src.infra.db.settings.connection import DBConnectionHandler
-from src.infra.db.repositories.users_repository import UsersRepository
+from src.infra.persistence.repositories import UsersRepository
 
 
 class TestUserRepository(unittest.TestCase):

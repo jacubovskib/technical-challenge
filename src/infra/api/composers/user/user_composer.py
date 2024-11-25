@@ -9,7 +9,7 @@ from src.infra.api.composers.base_composer import BaseComposer
 from src.infra.api.controller.user.user_controller import UserController
 from src.infra.api.presentation.http_types.http_request import HttpRequest
 from src.infra.api.presentation.http_types.http_response import HttpResponse
-from src.infra.db.repositories.users_repository import UsersRepository
+from src.infra.persistence.repositories import UsersRepository
 
 
 class UserComposer(BaseComposer):

@@ -5,10 +5,11 @@ from src.domain.pagination.pagination import Pagination
 from src.domain.pagination.search_query import SearchQuery
 from src.domain.user.user import User
 
+
 class AbsUsersGateway(ABC):
 
     @abstractmethod
-    def insert_usr(self, an_user: User) -> None: pass
+    def insert_usr(self, an_user: User) -> User: pass
 
     @abstractmethod
     def get_user(self, an_id: int) -> User: pass
