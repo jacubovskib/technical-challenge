@@ -4,7 +4,6 @@ from unittest.mock import Mock
 from src.application.usecase.user.retrive.get.find_user_by_id_usecase import FindUserByIdUseCase
 from src.domain.user.user import User
 
-
 class TestFindUserByIdUseCase(unittest.TestCase):
     def setUp(self):
         self.gateway = Mock()
@@ -13,51 +12,47 @@ class TestFindUserByIdUseCase(unittest.TestCase):
     def tearDown(self):
         self.gateway.reset_mock()
 
-    def test_given_valid_id_when_call_execute_then_return_user(self):
-        # Arrange
-        expected_id = 1
-        expected_name = "John Doe"
-        expected_email = "john@example.com"
-
-        a_user = User(
-            an_id=expected_id,
-            a_name=expected_name,
-            an_email=expected_email
+    def test_given_valid_user_id_when_execute_should_return_user(self):
+        # Given
+        user_id = 1
+        expected_user = User(
+            an_id=user_id,
+            a_name="John Doe",
+            an_email="john@example.com"
         )
+        self.gateway.get_user.return_value = expected_user
 
-        self.gateway.get_user.return_value = a_user
+        # When
+        result = self.use_case.execute(user_id)
 
-        # Act
-        result = self.use_case.execute(expected_id)
-
-        # Assert
+        # Then
         self.assertIsNotNone(result)
-        self.assertEqual(result.id, expected_id)
-        self.assertEqual(result.name, expected_name)
-        self.assertEqual(result.email, expected_email)
-        self.gateway.get_user.assert_called_once_with(expected_id)
+        self.assertEqual(result.id, user_id)
+        self.assertEqual(result.name, "John Doe")
+        self.assertEqual(result.email, "john@example.com")
+        self.gateway.get_user.assert_called_once_with(user_id)
 
-    def test_given_valid_id_when_call_execute_then_return_none(self):
-        # Arrange
+    def test_given_nonexistent_user_id_when_execute_should_return_none(self):
+        # Given
         user_id = 1
         self.gateway.get_user.return_value = None
 
-        # Act
+        # When
         result = self.use_case.execute(user_id)
 
-        # Assert
+        # Then
         self.assertIsNone(result)
         self.gateway.get_user.assert_called_once_with(user_id)
 
-    def test_given_valid_id_when_call_execute_then_return_server_error(self):
-        # Arrange
+    def test_given_valid_user_id_when_execute_should_raise_server_error(self):
+        # Given
         user_id = 1
-        expected_message = "Internal Server Error"
-        self.gateway.get_user.side_effect = Exception(expected_message)
+        error_message = "Internal Server Error"
+        self.gateway.get_user.side_effect = Exception(error_message)
 
-        # Act & Assert
+        # When/Then
         with self.assertRaises(Exception) as context:
             self.use_case.execute(user_id)
 
-        self.assertEqual(str(context.exception), expected_message)
+        self.assertEqual(str(context.exception), error_message)
         self.gateway.get_user.assert_called_once_with(user_id)

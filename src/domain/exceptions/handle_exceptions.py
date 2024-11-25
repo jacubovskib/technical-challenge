@@ -1,4 +1,5 @@
 from src.domain.exceptions import BadRequestException, NotFoundException, IntegrityException
+from src.domain.exceptions.types.validation_exception import ValidationException
 from src.infra.api.presentation.http_types.http_response import HttpResponse
 from sqlite3 import IntegrityError
 import re
@@ -8,7 +9,7 @@ class HandleException:
 
     @staticmethod
     def handle(exception: Exception) -> HttpResponse:
-        if isinstance(exception, (NotFoundException, BadRequestException, IntegrityException)):
+        if isinstance(exception, (NotFoundException, BadRequestException, IntegrityException, ValidationException)):
             return HandleException.__handle_domain_exception(exception)
 
         if isinstance(exception, IntegrityError) and "UNIQUE constraint failed" in str(exception):

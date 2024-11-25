@@ -8,21 +8,22 @@ class TestUser(TestCase):
         self.expected_name = "John Doe"
         self.expected_email = "john@example.com"
 
-    def test_given_valid_data_when_create_user_then_return_user(self):
-        # Arrange & Act
-        user = User(
-            an_id=self.expected_id,
-            a_name=self.expected_name,
-            an_email=self.expected_email
-        )
+    def test_given_valid_user_data_when_creating_user_should_return_user_with_correct_values(self):
+        # Given
+        user_id = self.expected_id
+        user_name = self.expected_name
+        user_email = self.expected_email
 
-        # Assert
+        # When
+        user = User(an_id=user_id, a_name=user_name, an_email=user_email)
+
+        # Then
         self.assertEqual(user.id, self.expected_id)
         self.assertEqual(user.name, self.expected_name)
         self.assertEqual(user.email, self.expected_email)
 
-    def test_given_valid_user_when_call_repr_then_return_string_representation(self):
-        # Arrange
+    def test_given_valid_user_when_getting_string_representation_should_return_formatted_string(self):
+        # Given
         user = User(
             an_id=self.expected_id,
             a_name=self.expected_name,
@@ -30,27 +31,32 @@ class TestUser(TestCase):
         )
         expected_repr = f"User(id={self.expected_id}, name={self.expected_name}, email={self.expected_email})"
 
-        # Act
+        # When
         result = repr(user)
 
-        # Assert
+        # Then
         self.assertEqual(result, expected_repr)
 
-    def test_given_valid_user_when_access_properties_then_return_correct_values(self):
-        # Arrange & Act
+    def test_given_valid_user_when_accessing_properties_should_return_correct_values(self):
+        # Given
         user = User(
             an_id=self.expected_id,
             a_name=self.expected_name,
             an_email=self.expected_email
         )
 
-        # Assert
-        self.assertEqual(user.id, self.expected_id)
-        self.assertEqual(user.name, self.expected_name)
-        self.assertEqual(user.email, self.expected_email)
+        # When
+        user_id = user.id
+        user_name = user.name
+        user_email = user.email
 
-    def test_given_valid_user_when_update_then_return_new_user_with_updated_values(self):
-        # Arrange
+        # Then
+        self.assertEqual(user_id, self.expected_id)
+        self.assertEqual(user_name, self.expected_name)
+        self.assertEqual(user_email, self.expected_email)
+
+    def test_given_valid_user_when_updating_properties_should_return_new_user_with_updated_values(self):
+        # Given
         original_user = User(
             an_id=self.expected_id,
             a_name=self.expected_name,
@@ -59,10 +65,10 @@ class TestUser(TestCase):
         new_name = "Jane Doe"
         new_email = "jane@example.com"
 
-        # Act
+        # When
         updated_user = original_user.update(self.expected_id, new_name, new_email)
 
-        # Assert
+        # Then
         self.assertEqual(updated_user.id, self.expected_id)
         self.assertEqual(updated_user.name, new_name)
         self.assertEqual(updated_user.email, new_email)
