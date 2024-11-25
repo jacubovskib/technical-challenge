@@ -16,59 +16,57 @@ class TestCreateUserUseCase(unittest.TestCase):
     def tearDown(self):
         self.gateway.reset_mock()
 
-    def test_given_valid_command_when_calls_create_user_should_return_user(self):
-        # Arrange
+    def test_given_valid_input_when_create_user_should_return_user_successfully(self):
+        # Given
         expected_name = "John Doe"
         expected_email = "john@example.com"
-        command = CreateUserInput(name=expected_name, email=expected_email)
-
+        input_command = CreateUserInput(name=expected_name, email=expected_email)
         expected_user = User(a_name=expected_name, an_email=expected_email)
         self.gateway.insert_usr.return_value = expected_user
 
-        # Act
-        result = self.use_case.execute(command)
+        # When
+        result = self.use_case.execute(input_command)
 
-        # Assert
+        # Then
         self.assertIsNotNone(result)
         self.assertEqual(result.name, expected_name)
         self.assertEqual(result.email, expected_email)
         self.gateway.insert_usr.assert_called_once_with(expected_user)
 
-    def test_given_invalid_name_when_calls_create_user_should_return_validation_error(self):
-        # Arrange
+    def test_given_empty_name_when_create_user_should_raise_validation_error(self):
+        # Given
         expected_error_message = "Name cannot be empty"
-        command = CreateUserInput(name="", email="john@example.com")
+        input_command = CreateUserInput(name="", email="john@example.com")
 
-        # Act & Assert
+        # When/Then
         with self.assertRaises(ValidationException) as error_context:
-            self.use_case.execute(command)
+            self.use_case.execute(input_command)
 
         self.assertEqual(str(error_context.exception), expected_error_message)
         self.gateway.insert_usr.assert_not_called()
 
-    def test_given_invalid_email_when_calls_create_user_should_return_validation_error(self):
-        # Arrange
+    def test_given_invalid_email_when_create_user_should_raise_validation_error(self):
+        # Given
         expected_error_message = "Invalid email format"
-        command = CreateUserInput(name="John Doe", email="invalid@email")
+        input_command = CreateUserInput(name="John Doe", email="invalid@email")
 
-        # Act & Assert
+        # When/Then
         with self.assertRaises(ValidationException) as error_context:
-            self.use_case.execute(command)
+            self.use_case.execute(input_command)
 
         self.assertEqual(str(error_context.exception), expected_error_message)
         self.gateway.insert_usr.assert_not_called()
 
-    def test_given_valid_command_when_gateway_fails_should_return_error(self):
-        # Arrange
+    def test_given_valid_input_when_gateway_fails_should_raise_server_error(self):
+        # Given
         expected_error_message = "Internal Server Error"
-        command = CreateUserInput(name="John Doe", email="john@example.com")
-
+        input_command = CreateUserInput(name="John Doe", email="john@example.com")
         expected_user = User(a_name="John Doe", an_email="john@example.com")
         self.gateway.insert_usr.side_effect = ServerError(expected_error_message)
 
-        # Act & Assert
+        # When/Then
         with self.assertRaises(ServerError) as error_context:
-            self.use_case.execute(command)
+            self.use_case.execute(input_command)
 
         self.assertEqual(str(error_context.exception), expected_error_message)
         self.gateway.insert_usr.assert_called_once_with(expected_user)

@@ -7,6 +7,7 @@ Backend application developed for the technical challenge, implementing a simpli
 This structure follows clean architecture principles with clear separation of concerns between layers.
 <pre>
 project/
+├── api-schema/             # API Schema definitions
 ├── src/
 │   ├── application/        # Use cases
 │   │                       # Core business logic, independent of external frameworks

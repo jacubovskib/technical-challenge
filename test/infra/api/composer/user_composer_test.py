@@ -9,37 +9,37 @@ class TestUserComposer(unittest.TestCase):
     def setUp(self):
         self.composer = UserComposer()
 
-    def test_list_should_return_callable_handler(self):
-        # Act
+    def test_given_list_action_when_compose_should_return_callable_handler(self):
+        # When
         handler = self.composer.list()
 
-        # Assert
+        # Then
         self.assertTrue(callable(handler))
 
-    def test_get_should_return_callable_handler(self):
-        # Act
+    def test_given_get_action_when_compose_should_return_callable_handler(self):
+        # When
         handler = self.composer.get()
 
-        # Assert
+        # Then
         self.assertTrue(callable(handler))
 
-    def test_create_should_return_callable_handler(self):
-        # Act
+    def test_given_create_action_when_compose_should_return_callable_handler(self):
+        # When
         handler = self.composer.create()
 
-        # Assert
+        # Then
         self.assertTrue(callable(handler))
 
-    def test_update_should_return_callable_handler(self):
-        # Act
+    def test_given_update_action_when_compose_should_return_callable_handler(self):
+        # When
         handler = self.composer.update()
 
-        # Assert
+        # Then
         self.assertTrue(callable(handler))
 
-    def test_delete_should_return_callable_handler(self):
-        # Act
+    def test_given_delete_action_when_compose_should_return_callable_handler(self):
+        # When
         handler = self.composer.delete()
 
-        # Assert
+        # Then
         self.assertTrue(callable(handler))

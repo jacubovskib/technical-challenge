@@ -29,7 +29,7 @@ class UpdateUserUseCase(AbsUpdateUserUseCase):
 
         if notification.has_errors():
             _errors: List[str] = notification.get_errors()
-            raise ValidationException(',\n'.join(_errors))
+            raise ValidationException(','.join(_errors))
 
         self.__gateway.update_user(user_updated)
 
